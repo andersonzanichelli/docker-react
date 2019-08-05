@@ -8,3 +8,16 @@ before_install:
 script:
   - docker run -e CI=true anderzanic/frontend npm run test
 language: generic
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-2"
+  app: "docker_react"
+  env: "Docker-env"
+  bucket_name: "elasticbeanstalk-us-west-2-2-23231234"
+  bucket_path: "docker_react"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
